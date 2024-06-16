@@ -4,6 +4,9 @@ import { useState } from "react";
 import HomeCard from "./HomeCard";
 import { useRouter } from "next/navigation";
 import MeetingModal from "./MeetingModal";
+import { useUser } from "@clerk/nextjs";
+import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useToast } from "@/components/ui/use-toast";
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -12,7 +15,74 @@ const MeetingTypeList = () => {
     "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
   >();
 
-  const createMeeting = () => {};
+  const { user } = useUser();
+  const client = useStreamVideoClient();
+  const [values, setValues] = useState({
+    dateTime: new Date(),
+    description: "",
+    link: "",
+  });
+
+  const [callDetails, setCallDetails] = useState<Call>();
+
+  const { toast } = useToast();
+
+  // usually when we do try and catch, the function must be async
+  const createMeeting = async () => {
+    if (!client || !user) return; // exit out of the function if there is no client or user
+
+    try {
+      // if the user does not select a date and a time for a schedule meeting
+      if (!values.dateTime) {
+        toast({
+          title: "Please select a date and a time",
+        });
+        return;
+      }
+
+      // generate a random id for the call
+      // long ago, we have to use a library to genrate the random id but now we can just do it like this:
+      const id = crypto.randomUUID();
+
+      // create a call
+      const call = client.call("default", id); // set the call type to default
+
+      if (!call) throw new Error("Failed to create call");
+
+      // if we succeed, get the time that the call / meeting starts at
+      // toISOString() will give us the string of that date time
+      const startsAt =
+        values.dateTime.toISOString() || new Date(Date.now()).toISOString();
+
+      // get the description for the call
+      const description = values.description || "Instant meeting";
+
+      // get or create the call (depending if it already exist or we need to create it)
+      await call.getOrCreate({
+        data: {
+          starts_at: startsAt,
+          custom: {
+            description,
+          },
+        },
+      });
+
+      setCallDetails(call);
+
+      if (!values.description) {
+        router.push(`/meeting/${call.id}`);
+      }
+
+      toast({
+        title: "Meeting successfully created",
+      });
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Failed to create meeting",
+      });
+    }
+  };
   return (
     // grid-cols- means that how many grid that will be shown in a row. If grid-cols-4, than it means that it will show 4 grid in a row (4 columns in a row)
     <section className="grid grid-cols-1 gap-[100px] md:grid-cols-2 xl:grid-cols-4 ">
