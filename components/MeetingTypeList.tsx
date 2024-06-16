@@ -23,8 +23,10 @@ const MeetingTypeList = () => {
     link: "",
   });
 
+  // useState of a type Call
   const [callDetails, setCallDetails] = useState<Call>();
 
+  // toast message
   const { toast } = useToast();
 
   // usually when we do try and catch, the function must be async
@@ -41,7 +43,7 @@ const MeetingTypeList = () => {
       }
 
       // generate a random id for the call
-      // long ago, we have to use a library to genrate the random id but now we can just do it like this:
+      // long ago, we have to use a library to generate the random id but now we can just do it like this:
       const id = crypto.randomUUID();
 
       // create a call
@@ -67,8 +69,11 @@ const MeetingTypeList = () => {
         },
       });
 
+      // save the call details
       setCallDetails(call);
 
+      // this implies that it is an instant meeting
+      // the absence of a description indicates that the user wants to start the meeting immediately without any additional details
       if (!values.description) {
         router.push(`/meeting/${call.id}`);
       }
