@@ -20,7 +20,12 @@ const Meeting = ({ params: { id } }: { params: { id: string } }) => {
       <StreamCall call={call}>
         <StreamTheme>
           {/* check whether the audio and video setup has been completed or not*/}
-          {!isSetupComplete ? <MeetingSetup /> : <MeetingRoom />}
+          {!isSetupComplete ? (
+            <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
+          ) : (
+            // it says "or" but actually it means that if the isSetupIsComplete, it means that we can continue to the next part which is the meeting room
+            <MeetingRoom />
+          )}
         </StreamTheme>
       </StreamCall>
     </main>

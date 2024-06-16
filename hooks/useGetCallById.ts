@@ -1,4 +1,5 @@
 // hook is basically just a function that starts with the word "use". So here we just like create a new function
+// for a custom hook, basically we just use some prebuilt hooks, create some logic and return the result
 
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useEffect, useState } from "react";
