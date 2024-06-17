@@ -4,12 +4,18 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 
+// the styles package that made the video layout so much better
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Hive",
   description:
     "Hive is a cutting-edge video conferencing platform integrating seamless video, audio, and chat capabilities, enhancing virtual meetings, webinars, and social gatherings for enhanced connectivity and productivity.",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
 };
 
 export default function RootLayout({
