@@ -9,7 +9,7 @@ const Home = () => {
   const time = now.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    timeZone: "Asia/Kuala_Lumpur",
+    // timeZone: "Asia/Kuala_Lumpur",
   });
   // intl stands for international
   // we use .format because initially it will return the date object but we dont want it in object, so we have to use .format to convert it into string
