@@ -6,6 +6,8 @@ import { Toaster } from "@/components/ui/toaster";
 
 // the styles package that made the video layout so much better
 import "@stream-io/video-react-sdk/dist/css/styles.css";
+// the styles package that made react date picker so much better
+import "react-datepicker/dist/react-datepicker.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
