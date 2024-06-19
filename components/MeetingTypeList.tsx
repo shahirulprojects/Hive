@@ -9,6 +9,7 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/components/ui/use-toast";
 import { Textarea } from "./ui/textarea";
 import ReactDatePicker from "react-datepicker";
+import { Input } from "./ui/input";
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -180,11 +181,25 @@ const MeetingTypeList = () => {
       <MeetingModal
         isOpen={meetingState === "isInstantMeeting"} // isOpen is true if the meetingState is isInstantMeeting
         onClose={() => setMeetingState(undefined)} // set the meeting state to undefined to reset it
-        title="Start an Instant Meeting"
+        title="Start An Instant Meeting"
         className="text-center"
         buttonText="Start Meeting"
         handleClick={createMeeting}
       />
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"} // isOpen is true if the meetingState is isJoiningMeeting
+        onClose={() => setMeetingState(undefined)} // set the meeting state to undefined to reset it
+        title="Invitation Link"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={() => router.push(values.link)} // will be redirected to the other user's personal room
+      >
+        <Input
+          placeholder="Insert the invitation link here"
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          onChange={(e) => setValues({ ...values, link: e.target.value })} // spread the previous value and set the link to be equal to event.target.value
+        />
+      </MeetingModal>
     </section>
   );
 };

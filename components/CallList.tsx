@@ -93,9 +93,9 @@ const CallList = ({ type }: { type: "ended" | "upcoming" | "recordings" }) => {
                 : "/icons/recordings.svg"
             }
             title={
-              (meeting as Call).state?.custom.description.substring(0, 30) ||
-              meeting.filename.substring(0, 30) ||
-              "No Description"
+              (meeting as Call).state?.custom?.description?.substring(0, 30) ||
+              meeting?.filename?.substring(0, 30) ||
+              "Personal Meeting"
             } // access the meeting the description and cut it to only 30 characters if it is too long, or display the recorded meetings name, or else display no description
             date={
               // format the date and time
