@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Hive",
   description:
-    "Hive is a cutting-edge video conferencing platform integrating seamless video, audio, and chat capabilities, enhancing virtual meetings, webinars, and social gatherings for enhanced connectivity and productivity.",
+    "Hive is a cutting-edge video conferencing platform integrating seamless video, audio, and chat capabilities. It enhance virtual meetings, webinars, and social gatherings for enhanced connectivity and productivity.",
   icons: {
     icon: "/icons/logo.svg",
   },
