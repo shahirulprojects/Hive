@@ -20,7 +20,7 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-Built with the latest Next.js, Hive is a cutting-edge video conferencing application that revolutionizes virtual meetings and collaboration. Hive integrates high-quality video and audio capabilities into one platform, simplifying meetings, webinars, and social gatherings. Experience enhanced connectivity and productivity with Hive.
+Built with the latest Next.js, Hive is a Google Meet-inspired video conferencing application that revolutionizes virtual meetings and collaboration. Hive integrates high-quality video and audio capabilities into one platform, simplifying meetings, webinars, and social gatherings. Experience enhanced connectivity and productivity with Hive.
 
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
